@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        //a)Get all the countries from the Asia continent /region using the Filter function
+
+        var request=new XMLHttpRequest();
+        request.open("GET","https://restcountries.com/v3.1/all");
+        request.send();
+        request.onload=function(){
+            var data=JSON.parse(request.response)
+            var out=data.filter((element)=>element.continents=="Asia")
+            console.log(out.map((element)=>element.name.common)) 
+        }
+
+        //b)Get all the countries with a population of less than 2 lakhs using Filter function
+        
+        var request=new XMLHttpRequest();
+        request.open("GET","https://restcountries.com/v3.1/all");
+        request.send();
+        request.onload=function(){
+            var data=JSON.parse(request.response)
+            var out=data.filter((element)=>element.population<200000)
+            console.log(out.map((element)=>element.name.common)) 
+        }
+
+        //c)Print the following details name, capital, flag using forEach function
+
+        var request=new XMLHttpRequest();
+        request.open("GET","https://restcountries.com/v3.1/all");
+        request.send();
+        request.onload=function(){
+            var data=JSON.parse(request.response)
+            data.forEach(element=>
+            console.log(element.name.common,element.capital,element.flag))}
+
+        //d)Print the total population of countries using reduce function
+        
+        var request=new XMLHttpRequest();
+        request.open("GET","https://restcountries.com/v3.1/all");
+        request.send();
+        request.onload=function(){
+            var data=JSON.parse(request.response)
+            var out=data.map((element)=>element.population)
+            var result=out.reduce((acc,element)=>element+acc)
+            console.log(result)}
+
+        //e)Print the country which uses US Dollars as currency.
+
+        var request=new XMLHttpRequest();
+        request.open("GET","https://restcountries.com/v3.1/all");
+        request.send();
+        request.onload=function(){
+            var data=JSON.parse(request.response)
+         for(var element in data){
+          for(var i in data[element].currencies){
+          var newarr=Object.keys(data[element].currencies);
+        
+           if(newarr.includes("USD"))
+           console.log(data[element].name.common    )
+        }
+          }
+         }
+            
+
+
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>
